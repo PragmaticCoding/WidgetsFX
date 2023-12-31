@@ -1,0 +1,35 @@
+.root {
+   -theme-colour: #113969;
+   -contrast-colour: #C6522F;
+   -complementary1: #43AA8B;
+   -complementary2: #B4CDED;
+   -complementary3: #80A4ED
+}
+
+
+.test-blue {
+  -fx-border-color: blue;
+  -fx-background-color : lightcyan;
+}
+
+.test-red {
+  -fx-border-color: firebrick;
+  -fx-background-color : lavenderblush;
+}
+
+.test-green {
+  -fx-border-color: green;
+  -fx-background-color : derive(yellowgreen, +50%);
+}
+
+.label-prompt {
+  -fx-text-fill: -theme-colour;
+  -fx-font-weight: bold;
+  -fx-font-size: 15px;
+}
+
+.label-heading {
+  -fx-text-fill: -contrast-colour;
+  -fx-font-weight: bold;
+  -fx-font-size: 32px;
+}

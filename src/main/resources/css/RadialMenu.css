@@ -1,0 +1,116 @@
+.root {
+  -brown-sugar: hsb(11, 42%, 54%);
+  -s-brown-sugar: hsb(11, 52%, 45%);
+  -sage: hsb(83, 12%, 55%);
+  -s-sage: hsb(83, 23%, 35%);
+  -air-force-blue: hsb(199, 20%, 53%);
+  -s-air-force-blue: hsb(199, 35%, 45%);
+  -burnt-sienna: hsb(19, 75%, 60%);
+  -s-burnt-sienna: hsb(19, 85%, 45%);
+  -space-cadet: hsb(227, 42%, 19%);
+  -s-space-cadet: hsb(227, 65%, 40%);
+  -lion: hsb(38, 47%, 57%);
+  -s-lion: hsb(38, 65%, 45%);
+  -feldgrau: hsb(159, 30%, 31%);
+  -s-feldgrau: hsb(159, 40%, 31%);
+  -rm-colour-0: -brown-sugar;
+  -rm-saturate-0: -s-brown-sugar;
+  -rm-colour-1: -sage;
+  -rm-saturate-1: -s-sage;
+  -rm-colour-2: -air-force-blue;
+  -rm-saturate-2: -s-air-force-blue;
+  -rm-colour-3: -burnt-sienna;
+  -rm-saturate-3: -s-burnt-sienna;
+  -rm-colour-4: -space-cadet;
+  -rm-saturate-4: -s-space-cadet;
+  -rm-colour-5: -lion;
+  -rm-saturate-5: -s-lion;
+  -rm-colour-c: -feldgrau;
+  -rm-saturate-c: -s-feldgrau;
+  -rm-fill-colour: -feldgrau;
+  -rm-saturate-colour: -s-feldgrau;
+}
+
+.radial-menu {
+  -fx-border-color: Red;
+  -fx-border-width: 2px;
+  -rm-outer-radius: 200.0;
+  -rm-inner-radius: 70.0;
+}
+
+.radial-menu .circle {
+  -fx-fill: -rm-colour-c;
+  -fx-opacity: 0.7;
+}
+
+.radial-menu .circle:hover {
+  -fx-fill: -rm-saturate-c;
+  -fx-opacity: 0.99;
+}
+
+.radial-menu-item {
+  -fx-opacity: 0.85;
+}
+
+.radial-menu-item .wedge {
+  -fx-fill: -rm-fill-colour;
+  -fx-stroke: derive(-rm-fill-colour, -40%);
+  -fx-stroke-width: 3px;
+}
+
+
+
+.radial-menu-item .contents {
+  -fx-text-fill: ladder(-rm-fill-colour, BISQUE 34%, -space-cadet 35%);
+  -fx-font-weight: bold;
+  -fx-font-size: 16px;
+  -fx-wrap-text: true;
+  -fx-text-alignment: center;
+  -fx-content-display: bottom;
+}
+
+.radial-menu-item .wedge:hover {
+  -rm-fill-colour: -rm-saturate-colour;
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+  -fx-opacity: 1.0;
+}
+
+.radial-menu-item-0 {
+  -rm-fill-colour: -rm-colour-0;
+  -rm-saturate-colour: -rm-saturate-0;
+}
+
+.radial-menu-item-1 {
+  -rm-fill-colour: -rm-colour-1;
+  -rm-saturate-colour: -rm-saturate-1;
+}
+
+.radial-menu-item-2 {
+  -rm-fill-colour: -rm-colour-2;
+  -rm-saturate-colour: -rm-saturate-2;
+}
+
+.radial-menu-item-3 {
+  -rm-fill-colour: -rm-colour-3;
+  -rm-saturate-colour: -rm-saturate-3;
+}
+
+.radial-menu-item-4 {
+  -rm-fill-colour: -rm-colour-4;
+  -rm-saturate-colour: -rm-saturate-4;
+}
+
+.radial-menu-item-5 {
+  -rm-fill-colour: -rm-colour-5;
+  -rm-saturate-colour: -rm-saturate-5;
+}
+
+.radial-menu-item-6 {
+  -rm-fill-colour: -rm-colour-6;
+  -rm-saturate-colour: -rm-saturate-6;
+}
+
+.wrapper-region {
+   -fx-background-colour: linear-gradient(to bottom, deepskyblue, khaki);
+}

@@ -1,0 +1,16 @@
+.labelled-pane {
+}
+
+.labelled-pane > .pane-label {
+   -fx-font-size: 16px;
+}
+
+.labelled-pane > .pane-border {
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-radius: 6px;
+}
+
+.wrapper-region {
+   -fx-background-color: linear-gradient(to bottom, deepskyblue, khaki);
+}
