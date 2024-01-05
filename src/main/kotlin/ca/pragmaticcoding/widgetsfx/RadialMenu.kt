@@ -2,8 +2,7 @@ package ca.pragmaticcoding.widgetsfx
 
 import javafx.beans.binding.Bindings
 import javafx.beans.binding.DoubleBinding
-import javafx.beans.property.BooleanProperty
-import javafx.beans.property.SimpleBooleanProperty
+import javafx.beans.property.*
 import javafx.beans.value.ObservableDoubleValue
 import javafx.collections.FXCollections
 import javafx.css.CssMetaData
@@ -13,7 +12,6 @@ import javafx.css.StyleableDoubleProperty
 import javafx.event.EventHandler
 import javafx.scene.Group
 import javafx.scene.Node
-import javafx.scene.control.Label
 import javafx.scene.effect.Bloom
 import javafx.scene.effect.Effect
 import javafx.scene.input.MouseEvent
@@ -26,10 +24,10 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 class RadialMenu(
-    menuItem1: RadialMenuItem,
-    menuItem2: RadialMenuItem,
-    centreMenuItem: RadialMenuItem,
-    vararg additionalMenuItems: RadialMenuItem
+    menuItem1: RadialMenuModel,
+    menuItem2: RadialMenuModel,
+    centreMenuItem: RadialMenuModel,
+    vararg additionalMenuItems: RadialMenuModel
 ) : Pane() {
 
     private val menuItems = FXCollections.observableArrayList(menuItem1, menuItem2)
@@ -81,51 +79,49 @@ class RadialMenu(
         minWidth = 2.08 * outerRadiusProperty.value
     }
 
-    fun addMenuItem(vararg radialMenuItems: RadialMenuItem) {
-        radialMenuItems.forEach { radialMenuItem ->
+    fun addMenuItem(vararg radialMenuModels: RadialMenuModel) {
+        radialMenuModels.forEach { radialMenuItem ->
             menuItems += radialMenuItem
             children += createMenuItem(numItems.value - 1, radialMenuItem)
         }
     }
 
-    private fun createCentre(radialMenuItem: RadialMenuItem) = Circle().apply {
+    private fun createCentre(radialMenuModel: RadialMenuModel) = Circle().apply {
         styleClass += "centre"
         centerXProperty().bind(originX)
         centerYProperty().bind(originX)
         radiusProperty().bind(innerRadiusProperty.subtract(15.0))
-        onMouseClicked = EventHandler { radialMenuItem.action.invoke() }
-        onMouseEntered = EventHandler { effect = radialMenuItem.effect }
+        onMouseClicked = EventHandler { radialMenuModel.action.invoke() }
+        onMouseEntered = EventHandler { effect = radialMenuModel.effect }
         onMouseExited = EventHandler { effect = null }
     }
 
-    private fun createCentreLabel(radialMenuItem: RadialMenuItem) = Label(radialMenuItem.text).apply {
-        styleClass += "centre-contents"
-        graphic = radialMenuItem.graphic
-        this.translateXProperty().bind(originX.subtract(this.widthProperty().divide(2)))
-        this.translateYProperty().bind(originY.subtract(this.heightProperty().divide(2)))
-        isMouseTransparent = true
-    }
+    private fun createCentreLabel(radialMenuModel: RadialMenuModel) =
+        labelOf(radialMenuModel.text, "centre-contents", radialMenuModel.graphic).apply {
+            this.translateXProperty().bind(originX.subtract(this.widthProperty().divide(2)))
+            this.translateYProperty().bind(originY.subtract(this.heightProperty().divide(2)))
+            isMouseTransparent = true
+        }
 
-    private fun createMenuItem(itemNumber: Int, radialMenuItem: RadialMenuItem) = Group().apply {
+    private fun createMenuItem(itemNumber: Int, radialMenuModel: RadialMenuModel) = Group().apply {
         val wedge = createShape(itemNumber)
-        disableProperty().bind(radialMenuItem.disable)
+        disableProperty().bind(radialMenuModel.disable)
         styleClass += "radial-menu-item"
         styleClass += "radial-menu-item-$itemNumber"
         maxWidth = outerRadiusProperty.value * 2.0
         children += wedge
-        children += createLabel(radialMenuItem, itemNumber)
+        children += createLabel(radialMenuModel, itemNumber)
         wedge.onMouseEntered = EventHandler {
             toFront()
-            wedge.effect = radialMenuItem.effect
+            wedge.effect = radialMenuModel.effect
         }
         wedge.onMouseExited = EventHandler { wedge.effect = null }
-        wedge.onMouseClicked = EventHandler<MouseEvent> { radialMenuItem.action.invoke() }
+        wedge.onMouseClicked = EventHandler<MouseEvent> { radialMenuModel.action.invoke() }
     }
 
-    private fun createLabel(radialMenuItem: RadialMenuItem, itemNumber: Int) =
-        Label(radialMenuItem.text, radialMenuItem.graphic).apply {
+    private fun createLabel(radialMenuModel: RadialMenuModel, itemNumber: Int) =
+        labelOf(radialMenuModel.text, "contents", radialMenuModel.graphic).apply {
             isMouseTransparent = true
-            styleClass += "contents"
             maxWidthProperty().bind(xBinding(theta, outerRadiusProperty).subtract(originX).multiply(1.5))
             translateXProperty().bind(
                 xBinding(
@@ -187,11 +183,14 @@ class RadialMenu(
     }
 }
 
-data class RadialMenuItem(
-    val text: String,
-    val graphic: Node,
+class RadialMenuModel(
+    initialText: String,
+    initialGraphic: Node,
     val action: () -> Unit,
+    isDisable: Boolean = false,
     val effect: Effect = Bloom(0.2)
 ) {
-    val disable: BooleanProperty = SimpleBooleanProperty(false)
+    val disable: BooleanProperty = SimpleBooleanProperty(isDisable)
+    val text: StringProperty = SimpleStringProperty(initialText)
+    val graphic: ObjectProperty<Node> = SimpleObjectProperty(initialGraphic)
 }
