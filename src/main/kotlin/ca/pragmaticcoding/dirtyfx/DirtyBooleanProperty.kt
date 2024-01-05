@@ -2,7 +2,13 @@ package ca.pragmaticcoding.dirtyfx
 
 import javafx.beans.property.BooleanPropertyBase
 
-
+/**
+ * Provides SimpleBooleanProperty functionality with support for flagging changes from a baseline value.
+ * See [DirtyPropertyBase] for details about dirty property functions such as reset() and rebase()
+ * @param bean The object to which this property is related
+ * @param name The name of the property
+ * @param initialValue The initial value contained in the property
+ */
 class DirtyBooleanProperty(
     private val bean: Any?,
     private val name: String,

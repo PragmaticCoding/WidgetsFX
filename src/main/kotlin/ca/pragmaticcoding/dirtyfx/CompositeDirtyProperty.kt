@@ -10,7 +10,12 @@ import javafx.collections.FXCollections
 import javafx.collections.ListChangeListener
 import javafx.collections.ObservableList
 
-class CompositeDirtyProperty(override val base: DirtyPropertyBase<Any>) : DirtyProperty<Any>, ObservableValue<Boolean> {
+/**
+ * CompositeDirtyProperty
+ * @param base The new base class to use
+ */
+class CompositeDirtyProperty(override val base: DirtyPropertyBase<Any>) : DirtyProperty<Any>,
+    ObservableValue<Boolean> {
 
     val items: ObservableList<DirtyProperty<Any>> = FXCollections.observableArrayList<DirtyProperty<Any>>()
     private val isDirtyProperty: BooleanProperty = SimpleBooleanProperty(false)

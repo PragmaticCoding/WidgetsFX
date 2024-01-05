@@ -50,9 +50,9 @@ class RadialMenuApplication : Application() {
                 { println("Fifth item selected") }),
             RadialMenuItem(
                 "This is the Sixth",
-                FontIcon("captainicon-176:52:BISQUE"),
+                FontIcon("captainicon-271:52:BISQUE"),
                 { println("Sixth item selected") }
-            )
+            ).apply { disable.value = true }
         )
         center = menu
         padding = Insets(50.0)

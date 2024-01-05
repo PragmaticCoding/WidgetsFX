@@ -9,6 +9,9 @@ enum class LabelStyle(val selector: String) {
     PROMPT("label-prompt"), HEADING("label-heading")
 }
 
+/**
+ *
+ */
 infix fun <T : Labeled> T.styleAs(labelStyle: LabelStyle) = apply { styleClass += labelStyle.selector }
 infix fun <T : Labeled> T.styleAs(labelStyle: String) = apply { styleClass += labelStyle }
 

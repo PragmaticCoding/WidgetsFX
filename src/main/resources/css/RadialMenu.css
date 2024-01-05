@@ -32,33 +32,34 @@
 }
 
 .radial-menu {
-  -fx-border-color: Red;
-  -fx-border-width: 2px;
   -rm-outer-radius: 200.0;
   -rm-inner-radius: 70.0;
 }
 
-.radial-menu .circle {
+.radial-menu .centre {
   -fx-fill: -rm-colour-c;
   -fx-opacity: 0.7;
 }
 
-.radial-menu .circle:hover {
+.radial-menu .centre-contents {
+  -fx-text-fill: ladder(-rm-fill-colour, BISQUE 34%, -space-cadet 35%);
+  -fx-font-weight: bold;
+  -fx-font-size: 18px;
+  -fx-wrap-text: true;
+  -fx-text-alignment: center;
+  -fx-content-display: bottom;
+}
+
+.radial-menu .centre:hover {
   -fx-fill: -rm-saturate-c;
   -fx-opacity: 0.99;
+  -fx-scale-x: 1.1;
+  -fx-scale-y: 1.1;
 }
 
 .radial-menu-item {
   -fx-opacity: 0.85;
 }
-
-.radial-menu-item .wedge {
-  -fx-fill: -rm-fill-colour;
-  -fx-stroke: derive(-rm-fill-colour, -40%);
-  -fx-stroke-width: 3px;
-}
-
-
 
 .radial-menu-item .contents {
   -fx-text-fill: ladder(-rm-fill-colour, BISQUE 34%, -space-cadet 35%);
@@ -67,6 +68,12 @@
   -fx-wrap-text: true;
   -fx-text-alignment: center;
   -fx-content-display: bottom;
+}
+
+.radial-menu-item .wedge {
+  -fx-fill: -rm-fill-colour;
+  -fx-stroke: derive(-rm-fill-colour, -40%);
+  -fx-stroke-width: 3px;
 }
 
 .radial-menu-item .wedge:hover {
