@@ -1,9 +1,9 @@
 package ca.pragmaticcoding.kotlinfx
 
-import ca.pragmaticcoding.widgetsfx.RadialMenu
-import ca.pragmaticcoding.widgetsfx.RadialMenuModel
 import ca.pragmaticcoding.widgetsfx.addStyleSheet
 import ca.pragmaticcoding.widgetsfx.addWidgetStyles
+import ca.pragmaticcoding.widgetsfx.controls.RadialMenu
+import ca.pragmaticcoding.widgetsfx.controls.RadialMenuModel
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.geometry.Insets
@@ -15,7 +15,7 @@ import org.kordamp.ikonli.javafx.FontIcon
 class RadialMenuApplication : Application() {
     override fun start(stage: Stage) {
         val scene = Scene(createContent { Platform.exit() }, 640.0, 500.0).apply {
-            addStyleSheet("/css/RadialMenu.css")
+            addStyleSheet("/ca/pragmaticcoding/widgetsfx/css/RadialMenu.css")
             addWidgetStyles()
         }
         stage.title = "RadialMenu Demo"

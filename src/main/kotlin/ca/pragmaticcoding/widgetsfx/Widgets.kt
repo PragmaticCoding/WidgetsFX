@@ -1,99 +1,99 @@
 package ca.pragmaticcoding.widgetsfx
 
-import javafx.beans.WeakListener
-import javafx.beans.property.StringProperty
-import javafx.collections.MapChangeListener
-import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.scene.control.Button
-import javafx.scene.control.ButtonBase
-import javafx.scene.control.TextField
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.Region
-import java.lang.ref.WeakReference
 
-fun Scene.addWidgetStyles() = apply {
-   object {}::class.java.getResource("/css/widgetsfx.css")?.toString()?.let { stylesheets += it
-   println("found it")}
-}
+const val stylesheet: String = "/ca/pragmaticcoding/widgetsfx/css/widgetsfx.css"
 
-fun Scene.addStyleSheet(sheetName: String) = apply {
-   object {}::class.java.getResource(sheetName)?.toString()?.let { stylesheets += it }
-}
-
-fun <T : Parent> T.addWidgetStyles() = apply {
-   object {}::class.java.getResource("widgetsfx.css")?.toString()?.let { stylesheets += it }
-}
-
+/**
+ * Standard testing styles defined in widgetsfx.css.  These place coloured borders
+ * around the Regions and set a background colour.
+ * These styleclasses are intended to make it easier to understand the extents of regions
+ * in layouts when designing layouts.  They can easily be added to a Region via Node.testStyleAs()
+ *
+ * @see testStyleAs
+ *
+ */
 enum class TestStyle(val selector: String) {
-   BLUE("test-blue"), RED("test-red"), GREEN("test-green")
+    BLUE("test-blue"), RED("test-red"), GREEN("test-green")
 }
 
+/**
+ *  Extension function to add one of the standard testing styles defined in widgetsfx.css
+ *  to a Node.  These styles are intended to make it easier to understand how layout elements
+ *  are related to one another and their extents when designing GUI screens.
+ *
+ *  @param nodeStyle The testing style to be applied to the Node
+ */
 infix fun <T : Node> T.testStyleAs(nodeStyle: TestStyle) = apply { styleClass += nodeStyle.selector }
 
+/**
+ * Extension function to add the standard widgetsfx.css stylesheet to a Scene
+ */
+fun Scene.addWidgetStyles() = apply {
+    object {}::class.java.getResource(stylesheet)?.toString()?.let {
+        stylesheets += it
+    }
+}
+
+/**
+ * Extension function to add a stylesheet to a Scene
+ *
+ * @receiver Scene
+ * @param sheetName The filename of the stylesheet to add
+ */
+fun Scene.addStyleSheet(sheetName: String) = apply {
+    object {}::class.java.getResource(sheetName)?.toString()?.let { stylesheets += it }
+}
+
+/**
+ * Extension function to add the standard widgetsfx.css stylesheet to a Parent.
+ * Note that this will not have any effect unless the Parent is used as the Root
+ * element of a Scene.
+ */
+fun <T : Parent> T.addWidgetStyles() = apply {
+    object {}::class.java.getResource(stylesheet)?.toString()?.let { stylesheets += it }
+}
+
+/**
+ * Infix extension function to quickly add padding to a Region with all sides padded to the same amount.
+ *
+ * @param padSize The amount of padding to apply equally to all sides of the Region
+ */
 infix fun <T : Region> T.padWith(padSize: Double): T = apply { padding = Insets(padSize) }
 
+/**
+ * Infix extension function to add a styleclass selector to a Node.
+ *
+ * @param newStyleClass The selector to apply to the Node
+ */
 infix fun <T : Node> T.addStyle(newStyleClass: String): T = apply { styleClass += newStyleClass }
 
-fun textFieldOf(value: StringProperty) = TextField().apply { textProperty().bind(value) }
-
-infix fun TextField.bindTo(value: StringProperty) = apply { textProperty().bind(value) }
-
-fun buttonOf(text: String, handler: EventHandler<ActionEvent>) = Button(text) addAction handler
-
-operator fun Pane.plusAssign(newChild: Node) {
-   children += newChild
-}
+/**
+ *  Infix extension function to specify the alignment of on HBox
+ *
+ *  @receiver HBox
+ *
+ *  @param pos The Pos alignment to apply to the HBox
+ */
 
 infix fun HBox.alignTo(pos: Pos): HBox = apply { alignment = pos }
 
-infix fun <T : ButtonBase> T.addAction(eventHandler: EventHandler<ActionEvent>): T = apply { onAction = eventHandler }
-
-class MapConversionListener<SourceTypeKey, SourceTypeValue, TargetType>(targetList: MutableList<TargetType>,
-                                                                        val converter: (SourceTypeKey, SourceTypeValue) -> TargetType) :
-   MapChangeListener<SourceTypeKey, SourceTypeValue>, WeakListener {
-   internal val targetRef: WeakReference<MutableList<TargetType>> = WeakReference(targetList)
-   internal val sourceToTarget = HashMap<SourceTypeKey, TargetType>()
-
-   override fun onChanged(change: MapChangeListener.Change<out SourceTypeKey, out SourceTypeValue>) {
-      val list = targetRef.get()
-      if (list == null) {
-         change.map.removeListener(this)
-         sourceToTarget.clear()
-      } else {
-         if (change.wasRemoved()) {
-            list.remove(sourceToTarget[change.key])
-            sourceToTarget.remove(change.key)
-         }
-         if (change.wasAdded()) {
-            val converted = converter(change.key, change.valueAdded)
-            sourceToTarget[change.key] = converted
-            list.add(converted)
-         }
-      }
-   }
-
-   override fun wasGarbageCollected() = targetRef.get() == null
-
-   override fun hashCode() = targetRef.get().hashCode()
-
-   override fun equals(other: Any?): Boolean {
-      if (this === other) {
-         return true
-      }
-
-      val ourList = targetRef.get() ?: return false
-
-      if (other is MapConversionListener<*, *, *>) {
-         val otherList = other.targetRef.get()
-         return ourList === otherList
-      }
-      return false
-   }
+/**
+ * Operator to add a Node to a Pane or Pane subclass
+ *
+ * @param newChild The Node to add to the Pane
+ *
+ */
+operator fun Pane.plusAssign(newChild: Node) {
+    children += newChild
 }
+
+
+

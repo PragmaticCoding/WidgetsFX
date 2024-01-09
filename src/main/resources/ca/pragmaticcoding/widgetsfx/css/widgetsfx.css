@@ -28,8 +28,20 @@
   -fx-font-size: 15px;
 }
 
-.label-heading {
+.label-heading-1 {
   -fx-text-fill: -contrast-colour;
   -fx-font-weight: bold;
   -fx-font-size: 32px;
+}
+
+.label-heading-2 {
+  -fx-text-fill: -contrast-colour;
+  -fx-font-weight: bold;
+  -fx-font-size: 26px;
+}
+
+.label-heading-3 {
+  -fx-text-fill: -contrast-colour;
+  -fx-font-weight: bold;
+  -fx-font-size: 20px;
 }

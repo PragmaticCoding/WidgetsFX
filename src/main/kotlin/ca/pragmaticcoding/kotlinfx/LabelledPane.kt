@@ -1,11 +1,14 @@
 package ca.pragmaticcoding.kotlinfx
 
+import ca.pragmaticcoding.widgetsfx.h1Of
+import ca.pragmaticcoding.widgetsfx.plusAssign
 import javafx.application.Platform
 import javafx.beans.InvalidationListener
 import javafx.collections.ObservableList
 import javafx.geometry.Orientation
 import javafx.scene.Node
 import javafx.scene.control.Label
+import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
@@ -51,6 +54,7 @@ class LabelledPane(labelText: String) : Region() {
     }
 
     init {
+        content += HBox(h1Of("Fred"))
         children += listOf(borderPane, label, content)
         styleClass += "labelled-pane"
         minHeightProperty().bind(label.heightProperty().add(content.minHeightProperty()).add(20.0))

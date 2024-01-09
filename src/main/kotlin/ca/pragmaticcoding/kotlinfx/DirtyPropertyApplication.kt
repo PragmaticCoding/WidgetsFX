@@ -18,7 +18,7 @@ import javafx.stage.Stage
 class DirtyPropertyApplication : Application() {
     override fun start(stage: Stage) {
         val scene = Scene(createContent(), 320.0, 240.0).apply {
-            addStyleSheet("/css/LabelBox.css")
+            addStyleSheet("/ca/pragmaticcoding/widgetsfx/css/LabelBox.css")
             addWidgetStyles()
         }
         stage.title = "DirtyProperty Demo"

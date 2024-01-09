@@ -17,7 +17,7 @@ class LabelBox3Application : Application() {
 
     override fun start(stage: Stage) {
         val scene = Scene(createContent(), 500.0, 600.0).apply {
-            addStyleSheet("/css/LabelBox.css")
+            addStyleSheet("/ca/pragmaticcoding/widgetsfx/css/LabelBox.css")
             addWidgetStyles()
         }
         stage.title = "LabelBox Demo"
