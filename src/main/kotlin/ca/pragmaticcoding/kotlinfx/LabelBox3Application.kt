@@ -1,7 +1,7 @@
 package ca.pragmaticcoding.kotlinfx
 
-import ca.pragmaticcoding.widgetsfx.addStyleSheet
-import ca.pragmaticcoding.widgetsfx.addWidgetStyles
+import ca.pragmaticcoding.widgetsfx.layouts.addStyleSheet
+import ca.pragmaticcoding.widgetsfx.layouts.addWidgetStyles
 import javafx.application.Application
 import javafx.geometry.Insets
 import javafx.scene.Scene

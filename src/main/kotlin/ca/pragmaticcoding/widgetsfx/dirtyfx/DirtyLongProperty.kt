@@ -1,14 +1,14 @@
-package ca.pragmaticcoding.dirtyfx
+package ca.pragmaticcoding.widgetsfx.dirtyfx
 
-import javafx.beans.property.IntegerPropertyBase
+import javafx.beans.property.LongPropertyBase
 
 
-class DirtyIntegerProperty(
+class DirtyLongProperty(
     private val bean: Any?,
     private val name: String,
-    initialValue: Int? = null
+    initialValue: Long? = null
 ) :
-    IntegerPropertyBase(), DirtyProperty<Int> {
+    LongPropertyBase(), DirtyProperty<Long> {
     override fun getName() = name
     override fun getBean() = bean
     override val base = DirtyPropertyBase(this.asObject())
@@ -19,5 +19,5 @@ class DirtyIntegerProperty(
     }
 
     constructor() : this(null, "", null)
-    constructor(initialValue: Int) : this(null, "", initialValue)
+    constructor(initialValue: Long) : this(null, "", initialValue)
 }

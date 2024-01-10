@@ -1,6 +1,6 @@
 package ca.pragmaticcoding.widgetsfx.controls
 
-import ca.pragmaticcoding.widgetsfx.labelOf
+import ca.pragmaticcoding.widgetsfx.layouts.labelOf
 import javafx.beans.binding.Bindings
 import javafx.beans.binding.DoubleBinding
 import javafx.beans.property.*

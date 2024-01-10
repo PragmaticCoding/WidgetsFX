@@ -1,6 +1,8 @@
-package ca.pragmaticcoding.widgetsfx
+@file:Suppress("unused")
 
-import ca.pragmaticcoding.widgetsfx.LabelStyle.*
+package ca.pragmaticcoding.widgetsfx.layouts
+
+import ca.pragmaticcoding.widgetsfx.layouts.LabelStyle.*
 import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableObjectValue
 import javafx.beans.value.ObservableStringValue
@@ -40,10 +42,11 @@ enum class LabelStyle(val selector: String) {
 }
 
 /**
- * Applies a [LabelStyle] to a Label
+ * Decorator function to apply a [LabelStyle] to a Label
  *
  * @param labelStyle [LabelStyle] to apply to the Label
  * @receiver [Labeled]
+ * @return Labeled
  */
 infix fun <T : Labeled> T.styleAs(labelStyle: LabelStyle) = apply { styleClass += labelStyle.selector }
 
@@ -69,7 +72,7 @@ fun labelOf(value: ObservableStringValue, styleClass: String, graphicProperty: O
  * @param value The text to place in the Label
  * @return Label
  */
-fun h1Of(value: String) = Label() styleAs H1
+fun h1Of(value: String) = Label(value) styleAs H1
 
 /**
  * Factory method to create a Label styled as an [H1] with its Text property bound to
@@ -86,7 +89,7 @@ fun h1Of(value: ObservableStringValue) = Label() styleAs H1 bindTo value
  * @param value The text to place in the Label
  * @return Label
  */
-fun h2Of(value: String) = Label() styleAs H2
+fun h2Of(value: String) = Label(value) styleAs H2
 
 /**
  * Factory method to create a Label styled as an [H2] with its Text property bound to
@@ -103,7 +106,7 @@ fun h2Of(value: ObservableStringValue) = Label() styleAs H2 bindTo value
  * @param value The text to place in the Label
  * @return Label
  */
-fun h3Of(value: String) = Label() styleAs H3
+fun h3Of(value: String) = Label(value) styleAs H3
 
 /**
  * Factory method to create a Label styled as an [H3] with its Text property bound to
@@ -114,6 +117,10 @@ fun h3Of(value: String) = Label() styleAs H3
  */
 fun h3Of(value: ObservableStringValue) = Label() styleAs H3 bindTo value
 
-
+/**
+ * Operator definition for += for Labels that binds the Label's Text property to another StringProperty
+ *
+ * @param otherProperty StringProperty to bind the Label's Text property to.
+ */
 operator fun Labeled.plusAssign(otherProperty: StringProperty) = run { textProperty() += otherProperty }
 

@@ -1,4 +1,4 @@
-package ca.pragmaticcoding.dirtyfx
+package ca.pragmaticcoding.widgetsfx.dirtyfx
 
 import javafx.beans.property.ObjectPropertyBase
 

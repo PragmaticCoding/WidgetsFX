@@ -1,8 +1,8 @@
 package ca.pragmaticcoding.kotlinfx
 
-import ca.pragmaticcoding.dirtyfx.DirtyBooleanProperty
-import ca.pragmaticcoding.widgetsfx.addStyleSheet
-import ca.pragmaticcoding.widgetsfx.addWidgetStyles
+import ca.pragmaticcoding.widgetsfx.dirtyfx.DirtyBooleanProperty
+import ca.pragmaticcoding.widgetsfx.layouts.addStyleSheet
+import ca.pragmaticcoding.widgetsfx.layouts.addWidgetStyles
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.beans.InvalidationListener

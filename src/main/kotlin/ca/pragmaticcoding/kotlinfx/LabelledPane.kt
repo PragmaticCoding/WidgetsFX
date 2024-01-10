@@ -1,7 +1,7 @@
 package ca.pragmaticcoding.kotlinfx
 
-import ca.pragmaticcoding.widgetsfx.h1Of
-import ca.pragmaticcoding.widgetsfx.plusAssign
+import ca.pragmaticcoding.widgetsfx.layouts.h1Of
+import ca.pragmaticcoding.widgetsfx.layouts.plusAssign
 import javafx.application.Platform
 import javafx.beans.InvalidationListener
 import javafx.collections.ObservableList

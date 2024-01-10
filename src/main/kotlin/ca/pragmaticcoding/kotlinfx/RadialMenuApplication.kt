@@ -1,7 +1,7 @@
 package ca.pragmaticcoding.kotlinfx
 
-import ca.pragmaticcoding.widgetsfx.addStyleSheet
-import ca.pragmaticcoding.widgetsfx.addWidgetStyles
+import ca.pragmaticcoding.widgetsfx.layouts.addStyleSheet
+import ca.pragmaticcoding.widgetsfx.layouts.addWidgetStyles
 import ca.pragmaticcoding.widgetsfx.controls.RadialMenu
 import ca.pragmaticcoding.widgetsfx.controls.RadialMenuModel
 import javafx.application.Application
