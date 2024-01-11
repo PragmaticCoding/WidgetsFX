@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package ca.pragmaticcoding.widgetsfx.controls
 
 import javafx.beans.property.ObjectProperty
@@ -5,7 +7,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.Node
 import javafx.scene.control.Control
 import javafx.scene.control.Skin
-import org.kordamp.ikonli.javafx.FontIcon
+import javafx.scene.text.Text
 
 class TripleSwitch(val labelLeft: String, val labelCentre: String, val labelRight: String) : Control() {
 
@@ -14,15 +16,15 @@ class TripleSwitch(val labelLeft: String, val labelCentre: String, val labelRigh
         get() = _value.get()
         set(newValue) = _value.set(newValue)
 
-    private val _leftIcon: ObjectProperty<Node> = SimpleObjectProperty(FontIcon("captainicon-146"))
+    private val _leftIcon: ObjectProperty<Node> = SimpleObjectProperty(Text("Left"))
     var leftIcon: Node
         get() = _leftIcon.get()
         set(value) = _leftIcon.set(value)
-    private val _centreIcon: ObjectProperty<Node> = SimpleObjectProperty(FontIcon("captainicon-150"))
+    private val _centreIcon: ObjectProperty<Node> = SimpleObjectProperty(Text("Centre"))
     var centreIcon: Node
         get() = _centreIcon.get()
         set(value) = _centreIcon.set(value)
-    private val _rightIcon: ObjectProperty<Node> = SimpleObjectProperty(FontIcon("captainicon-158"))
+    private val _rightIcon: ObjectProperty<Node> = SimpleObjectProperty(Text("Right"))
     var rightIcon: Node
         get() = _rightIcon.get()
         set(value) = _rightIcon.set(value)

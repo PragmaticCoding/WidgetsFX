@@ -1,6 +1,5 @@
 plugins {
-    id 'java'
-    id 'application'
+    id 'java-library'
     id 'org.jetbrains.kotlin.jvm' version '1.8.10'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'org.openjfx.javafxplugin' version '0.0.13'
@@ -27,6 +26,11 @@ tasks.withType(JavaCompile) {
 
 kotlin {
     jvmToolchain(17)
+}
+
+application {
+    mainModule = 'ca.pragmaticcoding.widgetsfx'
+    mainClass = 'ca.pragmaticcoding.widgetsfx.LabelBoxApplication'
 }
 
 javafx {
