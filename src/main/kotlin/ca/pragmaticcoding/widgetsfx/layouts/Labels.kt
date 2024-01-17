@@ -48,21 +48,59 @@ enum class LabelStyle(val selector: String) {
  * @receiver [Labeled]
  * @return Labeled
  */
-infix fun <T : Labeled> T.styleAs(labelStyle: LabelStyle) = apply { styleClass += labelStyle.selector }
+infix fun <T : Labeled> T.styleAs(labelStyle: LabelStyle): T = apply { styleClass += labelStyle.selector }
 
-infix fun <T : Labeled> T.bindGraphic(graphicProperty: ObservableObjectValue<Node>) =
+/**
+ * Decorator function to bind the graphicProperty() of a Labeled to a Property
+ * @param graphicProperty ObservableObjectValue<Node> to bind to the graphicProperty
+ */
+infix fun <T : Labeled> T.bindGraphic(graphicProperty: ObservableObjectValue<Node>): T =
     apply { graphicProperty().bind(graphicProperty) }
 
+/**
+ * Decorator function to bind the textProperty() of a Labeled to an external Property
+ * @param value External ObservableStringValue to bind to textProperty()
+ */
+infix fun <T : Labeled> T.bindTo(value: ObservableStringValue): T = apply { textProperty().bind(value) }
 
-infix fun <T : Labeled> T.bindTo(value: ObservableStringValue) = apply { textProperty().bind(value) }
-
+/**
+ * Factory method to create a Label with its textProperty() bound to an external property
+ * and styled as LabelStyle.PROMPT
+ * @param value External ObservableStringValue to bind to the Label's Text property
+ */
 fun promptOf(value: ObservableStringValue) = Label() styleAs PROMPT bindTo value
+
+/**
+ * Factory method to create a Label with a static Text value
+ * and styled as LabelStyle.PROMPT
+ * @param value String to set as the Text value
+ */
 fun promptOf(value: String) = Label(value) styleAs PROMPT
+
+/**
+ * Factory method to create a Label with its textProperty() bound to an external property
+ * @param value External ObservableStringValue to bind to the Label's Text property
+ */
 fun labelOf(value: ObservableStringValue) = Label() bindTo value
+
+/**
+ * Factory method to create a Label with its textProperty() bound to an external property,
+ * a styleclass selector added, and optionally with a Graphic value set
+ * @param value External ObservableStringValue to bind to the Label's Text property
+ * @param styleClass String to use as the styleclass selector
+ * @param graphicNode Optional: Node to use as the Graphic for the Label
+ */
 fun labelOf(value: ObservableStringValue, styleClass: String, graphicNode: Node? = null) = Label().apply {
     graphicNode?.let { graphic = it }
 } bindTo value addStyle styleClass
 
+/**
+ * Factory method to create a Label with its textProperty() bound to an external property,
+ * a styleclass selector added, and its Graphic property bound to an external property
+ * @param value External ObservableStringValue to bind to the Label's Text property
+ * @param styleClass String to use as the styleclass selector
+ * @param graphicProperty ObservableObjectValue<Node> to bind to the Graphic property of the Label
+ */
 fun labelOf(value: ObservableStringValue, styleClass: String, graphicProperty: ObservableObjectValue<Node>) =
     Label() bindTo value bindGraphic graphicProperty addStyle styleClass
 

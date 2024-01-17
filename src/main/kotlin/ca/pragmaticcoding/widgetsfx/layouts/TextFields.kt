@@ -12,4 +12,11 @@ import javafx.scene.control.TextField
  */
 fun textFieldOf(boundValue: StringProperty) = TextField().apply { textProperty().bindBidirectional(boundValue) }
 
+
+/**
+ * Infix function to bind the textProperty() of a TextField to an external StringProperty
+ *
+ * @param value The external StringProperty to bind to
+ */
+
 infix fun TextField.bindTo(value: StringProperty) = apply { textProperty().bind(value) }

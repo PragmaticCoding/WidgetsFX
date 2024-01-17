@@ -2,6 +2,9 @@
 
 package ca.pragmaticcoding.widgetsfx.layouts
 
+import javafx.beans.InvalidationListener
+import javafx.beans.value.ObservableBooleanValue
+import javafx.css.PseudoClass
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.Node
@@ -95,6 +98,21 @@ infix fun HBox.alignTo(pos: Pos): HBox = apply { alignment = pos }
  */
 operator fun Pane.plusAssign(newChild: Node) {
     children += newChild
+}
+
+/**
+ * Decorator function to "bind" an external property to a PseudoClass such that
+ * changes in the external property will trigger Node.pseudoClassStateChanged()
+ *
+ * @param pseudoClass The PseudoClass to connect to this property
+ * @param property The external binary property to monitor for changes
+ */
+
+fun <T : Node> T.bindPseudoCode(pseudoClass: PseudoClass, property: ObservableBooleanValue): T = apply {
+    pseudoClassStateChanged(pseudoClass, property.value)
+    property.addListener(InvalidationListener {
+        pseudoClassStateChanged(pseudoClass, property.value)
+    })
 }
 
 
