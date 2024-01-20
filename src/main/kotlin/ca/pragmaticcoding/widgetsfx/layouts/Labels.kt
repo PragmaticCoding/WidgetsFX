@@ -156,6 +156,23 @@ fun h3Of(value: String) = Label(value) styleAs H3
 fun h3Of(value: ObservableStringValue) = Label() styleAs H3 bindTo value
 
 /**
+ * Factory method to create a Label styled as an [DATA]
+ *
+ * @param value The text to place in the Label
+ * @return Label
+ */
+fun dataOf(value: String) = Label(value) styleAs DATA
+
+/**
+ * Factory method to create a Label styled as an [DATA] with its Text property bound to
+ * an ObservableStringValue
+ *
+ * @param value ObservableStringProperty to bind the Label's Text property to
+ * @return Label
+ */
+fun dataOf(value: ObservableStringValue) = Label() styleAs DATA bindTo value
+
+/**
  * Operator definition for += for Labels that binds the Label's Text property to another StringProperty
  *
  * @param otherProperty StringProperty to bind the Label's Text property to.

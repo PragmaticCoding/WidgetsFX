@@ -10,12 +10,12 @@ plugins {
     id("org.jetbrains.dokka") version "1.9.10"
     id("maven-publish")
     id("signing")
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+//    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 group = "ca.pragmaticcoding"
 val archivesBaseName = "WidgetsFX"
-version = "0.1-SNAPSHOT"
+version = "0.1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -121,6 +121,7 @@ publishing {
         }
     }
 }
+
 
 signing {
     sign(publishing.publications["maven"])

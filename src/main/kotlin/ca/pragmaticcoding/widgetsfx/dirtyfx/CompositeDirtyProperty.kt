@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package ca.pragmaticcoding.widgetsfx.dirtyfx
 
 import javafx.beans.InvalidationListener
@@ -56,7 +58,7 @@ class CompositeDirtyProperty(override val base: DirtyPropertyBase<Any>) : DirtyP
     }
 
     fun remove(dirtyProperty: DirtyProperty<Any>) {
-        items += dirtyProperty
+        items -= dirtyProperty
     }
 
     fun clear() = items.clear()
