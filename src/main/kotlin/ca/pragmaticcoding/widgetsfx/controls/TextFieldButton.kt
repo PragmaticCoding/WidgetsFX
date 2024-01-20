@@ -6,7 +6,6 @@ import ca.pragmaticcoding.widgetsfx.layouts.promptOf
 import ca.pragmaticcoding.widgetsfx.layouts.stringField
 import javafx.beans.binding.Bindings
 import javafx.beans.property.StringProperty
-import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.geometry.Pos
 import javafx.scene.control.Button
@@ -29,10 +28,9 @@ import java.util.function.Consumer
 class TextFieldButton(
     private val prompt: String,
     private val buttonText: String,
-    boundValue: StringProperty,
+    private val boundValue: StringProperty,
     private val buttonAction: Consumer<Runnable>
 ) : HBox() {
-    private val boundValue: StringProperty = boundValue
     private var preRunAction: Runnable? = null
 
     init {
@@ -46,7 +44,7 @@ class TextFieldButton(
         alignment = Pos.CENTER_LEFT
         val button = Button(buttonText)
         val textField: TextField = stringField(boundValue)
-        button.onAction = EventHandler { evt: ActionEvent? ->
+        button.onAction = EventHandler {
             button.isDisable = true
             if (preRunAction != null) {
                 preRunAction!!.run()
