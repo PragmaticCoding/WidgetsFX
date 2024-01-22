@@ -1,8 +1,10 @@
 @file:Suppress("unused")
 
-package ca.pragmaticcoding.widgetsfx.layouts
+package ca.pragmaticcoding.widgetsfx.layouts.labels
 
-import ca.pragmaticcoding.widgetsfx.layouts.LabelStyle.*
+import ca.pragmaticcoding.widgetsfx.layouts.addStyle
+import ca.pragmaticcoding.widgetsfx.layouts.labels.LabelStyle.*
+import ca.pragmaticcoding.widgetsfx.layouts.properties.plusAssign
 import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableObjectValue
 import javafx.beans.value.ObservableStringValue

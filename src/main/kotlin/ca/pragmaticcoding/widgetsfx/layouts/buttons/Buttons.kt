@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package ca.pragmaticcoding.widgetsfx.layouts
+package ca.pragmaticcoding.widgetsfx.layouts.buttons
 
 import javafx.event.ActionEvent
 import javafx.event.EventHandler

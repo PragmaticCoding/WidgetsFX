@@ -1,8 +1,12 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
 package ca.pragmaticcoding.widgetsfx.controls
 
-import ca.pragmaticcoding.widgetsfx.layouts.*
+import ca.pragmaticcoding.widgetsfx.layouts.labels.dataOf
+import ca.pragmaticcoding.widgetsfx.layouts.labels.promptOf
+import ca.pragmaticcoding.widgetsfx.layouts.textfields.decimalField
+import ca.pragmaticcoding.widgetsfx.layouts.textfields.integerField
+import ca.pragmaticcoding.widgetsfx.layouts.textfields.stringField
 import javafx.beans.property.Property
 import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableStringValue

@@ -1,14 +1,14 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
 package ca.pragmaticcoding.widgetsfx.controls
 
 import javafx.beans.InvalidationListener
 import javafx.beans.property.BooleanProperty
+import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.StringProperty
 import javafx.css.*
 import javafx.css.converter.EnumConverter
-import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.geometry.Orientation
 import javafx.geometry.Pos
@@ -20,7 +20,7 @@ import javafx.scene.layout.HBox
 import javafx.scene.layout.Region
 import javafx.scene.layout.VBox
 
-typealias ButtonRunner = (Runnable) -> Unit
+typealias ButtonRunner = (() -> Unit) -> Unit
 
 class InputActionWidget(
     private val boundProperty: StringProperty,
@@ -34,28 +34,28 @@ class InputActionWidget(
     private val textField = TextField()
     private val button = Button(buttonText)
 
-    fun labelTextProperty() = label.textProperty()
+    fun labelTextProperty(): StringProperty = label.textProperty()
     var labelText: String
         get() = label.text
         set(value) {
             label.text = value
         }
 
-    fun buttonTextProperty() = button.textProperty()
+    fun buttonTextProperty(): StringProperty = button.textProperty()
     var buttonText: String
         get() = button.text
         set(value) {
             button.text = value
         }
 
-    fun textFieldTextProperty() = textField.textProperty()
+    fun textFieldTextProperty(): StringProperty = textField.textProperty()
     var textFieldText: String
         get() = textField.text
         set(value) {
             textField.text = value
         }
 
-    fun textFormatterProperty() = textField.textFormatterProperty()
+    fun textFormatterProperty(): ObjectProperty<TextFormatter<*>> = textField.textFormatterProperty()!!
     var textFormatter: TextFormatter<*>?
         get() = textField.textFormatter
         set(value) {
@@ -130,7 +130,7 @@ class InputActionWidget(
 
     private fun configureButton() {
         button.apply {
-            onAction = EventHandler<ActionEvent> {
+            onAction = EventHandler {
                 actionRunning.value = true
                 buttonAction { actionRunning.value = false }
             }

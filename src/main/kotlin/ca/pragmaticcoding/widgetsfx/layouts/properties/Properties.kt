@@ -1,6 +1,4 @@
-@file:Suppress("unused")
-
-package ca.pragmaticcoding.widgetsfx.layouts
+package ca.pragmaticcoding.widgetsfx.layouts.properties
 
 import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableValue

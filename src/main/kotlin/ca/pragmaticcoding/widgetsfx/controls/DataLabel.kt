@@ -18,14 +18,13 @@ import javafx.scene.input.MouseEvent
 import javafx.util.Duration
 
 /**
- * A specialized form of Text, designed to display data values
+ * A specialized form of [Label], designed to display data values
  * and as an alternative to using disabled TextFields.
  * This element uses the CSS selector "label-data", and has a
  * pseudo-class ":error" to handle display when the data is flagged
  * as being in an error state.
- * One of the elements missing from Text, but present in Label, is
- * the ability to copy the contents to the clipboard.  This control has
- * this functionality added, where <CTRL><RightClick> will copy the
+ * This control has animated copy to clipboard
+ * functionality added, where <CTRL><RightClick> will copy the
  * entire contents of the Text to the clipboard.  Additionally, a small
  * animation will run to cue the user that the copy has happened.
  * </RightClick></CTRL> */

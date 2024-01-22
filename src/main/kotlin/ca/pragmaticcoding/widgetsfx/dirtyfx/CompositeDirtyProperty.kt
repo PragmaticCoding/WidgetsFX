@@ -1,4 +1,4 @@
-@file:Suppress("unused")
+@file:Suppress("MemberVisibilityCanBePrivate")
 
 package ca.pragmaticcoding.widgetsfx.dirtyfx
 
@@ -19,7 +19,7 @@ import javafx.collections.ObservableList
 class CompositeDirtyProperty(override val base: DirtyPropertyBase<Any>) : DirtyProperty<Any>,
     ObservableValue<Boolean> {
 
-    val items: ObservableList<DirtyProperty<Any>> = FXCollections.observableArrayList<DirtyProperty<Any>>()
+    val items: ObservableList<DirtyProperty<Any>> = FXCollections.observableArrayList()
     private val isDirtyProperty: BooleanProperty = SimpleBooleanProperty(false)
     override val isDirty: Boolean
         get() = isDirtyProperty.value
@@ -79,5 +79,5 @@ class CompositeDirtyProperty(override val base: DirtyPropertyBase<Any>) : DirtyP
 
     override fun addListener(listener: InvalidationListener?) = isDirtyProperty.addListener(listener)
 
-    override fun getValue() = isDirtyProperty.value
+    override fun getValue(): Boolean = isDirtyProperty.value
 }

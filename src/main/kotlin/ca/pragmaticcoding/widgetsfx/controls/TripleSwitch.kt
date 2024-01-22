@@ -34,10 +34,6 @@ class TripleSwitch(val labelLeft: String, val labelCentre: String, val labelRigh
     fun rightIconProperty() = _rightIcon
     fun valueProperty() = _value
 
-    init {
-
-    }
-
     override fun createDefaultSkin(): Skin<*> = TripleSwitchSkin(this)
 
     enum class ToggleSelection {

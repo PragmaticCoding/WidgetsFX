@@ -21,7 +21,7 @@ class DirtyDoubleProperty(
     override fun getName() = name
 
     /**
-     * Unitialized constructor with no "bean" information
+     * Uninitialized constructor with no "bean" information
      */
     constructor() : this(null, "", null)
 

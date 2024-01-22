@@ -1,6 +1,8 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package ca.pragmaticcoding.widgetsfx.controls
 
-import ca.pragmaticcoding.widgetsfx.layouts.labelOf
+import ca.pragmaticcoding.widgetsfx.layouts.labels.labelOf
 import javafx.beans.binding.Bindings
 import javafx.beans.binding.DoubleBinding
 import javafx.beans.property.*
@@ -15,7 +17,6 @@ import javafx.scene.Group
 import javafx.scene.Node
 import javafx.scene.effect.Bloom
 import javafx.scene.effect.Effect
-import javafx.scene.input.MouseEvent
 import javafx.scene.layout.Pane
 import javafx.scene.layout.Region
 import javafx.scene.shape.*
@@ -117,7 +118,7 @@ class RadialMenu(
             wedge.effect = radialMenuModel.effect
         }
         wedge.onMouseExited = EventHandler { wedge.effect = null }
-        wedge.onMouseClicked = EventHandler<MouseEvent> { radialMenuModel.action.invoke() }
+        wedge.onMouseClicked = EventHandler { radialMenuModel.action.invoke() }
     }
 
     private fun createLabel(radialMenuModel: RadialMenuModel, itemNumber: Int) =

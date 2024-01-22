@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package ca.pragmaticcoding.widgetsfx.layouts
+package ca.pragmaticcoding.widgetsfx.layouts.textfields
 
 import javafx.beans.binding.Bindings
 import javafx.beans.property.Property
@@ -134,7 +134,7 @@ class FixedDecimalFilter(private val decimalPlaces: Int) : UnaryOperator<TextFor
                 val newText = change.controlNewText
                 val decimalSize = newText.substring(decimalPos + 1).length
                 if (decimalSize < decimalPlaces) {
-                    change.text = change.text + "0"
+                    change.text += "0"
                 }
                 if (decimalSize > decimalPlaces) {
                     change.setRange(decimalPos + 1, decimalPos + 1 + decimalPlaces)

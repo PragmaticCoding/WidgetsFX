@@ -2,8 +2,8 @@
 
 package ca.pragmaticcoding.widgetsfx.controls
 
-import ca.pragmaticcoding.widgetsfx.layouts.promptOf
-import ca.pragmaticcoding.widgetsfx.layouts.stringField
+import ca.pragmaticcoding.widgetsfx.layouts.labels.promptOf
+import ca.pragmaticcoding.widgetsfx.layouts.textfields.stringField
 import javafx.beans.binding.Bindings
 import javafx.beans.property.StringProperty
 import javafx.event.EventHandler
