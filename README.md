@@ -101,3 +101,11 @@ error" property which is linked to a Pseudo-class which will automatically apply
 ## Planned Enhancements
 
 Classes and methods for TableView and TableColumn creation.
+
+# As a Library 
+
+At present, publishing this to Maven Central continues to defy me.  For now, there is a **releases** directory that has the jar files you might need.
+
+You'll have to download them and include them as file dependencies.  
+
+As of release 0.1.0 this was compiled with JavaFX 21, so it might require that to run.  In the future, I'll compile it with JavaFX 17 and avoid using features from JavaFX 19 and on.  This should give greater compatibility.  
