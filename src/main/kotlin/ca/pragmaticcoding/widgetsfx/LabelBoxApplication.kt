@@ -1,7 +1,5 @@
 package ca.pragmaticcoding.widgetsfx
 
-import ca.pragmaticcoding.widgetsfx.layouts.addStyleSheet
-import ca.pragmaticcoding.widgetsfx.layouts.addWidgetStyles
 import javafx.application.Application
 import javafx.geometry.Insets
 import javafx.scene.Scene
@@ -13,8 +11,8 @@ import javafx.stage.Stage
 class LabelBoxApplication : Application() {
     override fun start(stage: Stage) {
         val scene = Scene(createContent(), 320.0, 240.0).apply {
-            addStyleSheet("/ca/pragmaticcoding/widgetsfx/css/LabelBox.css")
             addWidgetStyles()
+            addWidgetStyles("css/LabelBox.css")
         }
         stage.title = "LabelBox Demo"
         stage.scene = scene

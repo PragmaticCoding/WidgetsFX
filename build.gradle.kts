@@ -2,13 +2,13 @@ import java.net.URI
 
 plugins {
     id("java-library")
-//    id("org.jetbrains.kotlin.jvm") version "1.8.10"
-    kotlin("jvm") version "1.8.10"
+    kotlin("jvm") version "1.9.22"
     id("org.javamodularity.moduleplugin") version "1.8.12"
     id("org.openjfx.javafxplugin") version "0.0.13"
-    id("org.beryx.jlink") version "2.25.0"
+    id("org.beryx.jlink") version "3.0.1"
     id("org.jetbrains.dokka") version "1.9.10"
-    id("maven-publish")
+    id("com.netflix.nebula.maven-publish") version "20.3.0"
+//    id("maven-publish")
     id("signing")
 //    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
@@ -40,22 +40,22 @@ tasks.register<Jar>("dokkaJavadocJar") {
 
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 }
 
-application {
-    mainModule = "ca.pragmaticcoding.widgetsfx"
-    mainClass = "ca.pragmaticcoding.widgetsfx.LabelBoxApplication"
-}
+//application {
+//    mainModule = "ca.pragmaticcoding.widgetsfx"
+//    mainClass = "ca.pragmaticcoding.widgetsfx.LabelBoxApplication"
+//}
 
 javafx {
-    version = "17.0.6"
+    version = "21.0.2"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 
@@ -68,13 +68,13 @@ tasks.test {
     useJUnitPlatform()
 }
 
-jlink {
-    imageZip = project.file("${layout.buildDirectory}/distributions/app-${javafx.platform.classifier}.zip")
-    options = listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
-    launcher {
-        name = "app"
-    }
-}
+//jlink {
+//    imageZip = project.file("${layout.buildDirectory}/distributions/app-${javafx.platform.classifier}.zip")
+//    options = listOf("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
+//    launcher {
+//        name = "app"
+//    }
+//}
 
 publishing {
     publications {
@@ -83,26 +83,26 @@ publishing {
             artifactId = "widgetsfx"
             artifact(tasks["dokkaJavadocJar"])
             pom {
-                name = "WidgetsFX"
-                description = "Tools for JavaFX development"
-                url = "https://github.com/optimatika/okAlgo"
+                name.value("WidgetsFX")
+                description.value("Tools for JavaFX development")
+                url.value("https://github.com/optimatika/okAlgo")
 
                 scm {
-                    connection = "scm:git:git://github.com/PragmaticCoding/WidgetsFX.git"
-                    developerConnection = "scm:git:git@github.com:PragmaticCoding/WidgetsFX.git"
-                    url = "https://github.com/PragmaticCoding/WidgetsFX"
+                    connection.value("scm:git:git://github.com/PragmaticCoding/WidgetsFX.git")
+                    developerConnection.value("scm:git:git@github.com:PragmaticCoding/WidgetsFX.git")
+                    url.value("https://github.com/PragmaticCoding/WidgetsFX")
                 }
 
                 licenses {
                     license {
-                        name = "Apache License 2.0"
-                        url = "http://www.apache.org/licenses/LICENSE-2.0"
+                        name.value("Apache License 2.0")
+                        url.value("http://www.apache.org/licenses/LICENSE-2.0")
                     }
                 }
                 developers {
                     developer {
-                        name = "Dave Barrett"
-                        email = "barrettda@gmail.com"
+                        name.value("Dave Barrett")
+                        email.value("barrettda@gmail.com")
                     }
                 }
             }

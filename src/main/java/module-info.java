@@ -11,6 +11,7 @@ module ca.pragmaticcoding.widgetsfx {
     exports ca.pragmaticcoding.widgetsfx.layouts.tablecolumns;
     exports ca.pragmaticcoding.widgetsfx.layouts.tables;
     exports ca.pragmaticcoding.widgetsfx.mvci;
+    exports ca.pragmaticcoding.widgetsfx;
 
     exports ca.pragmaticcoding.widgetsfx.controls;
 }

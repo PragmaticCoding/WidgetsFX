@@ -3,18 +3,18 @@
 package ca.pragmaticcoding.widgetsfx.layouts
 
 import javafx.beans.InvalidationListener
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.value.ObservableBooleanValue
 import javafx.css.PseudoClass
 import javafx.geometry.Insets
 import javafx.geometry.Pos
 import javafx.scene.Node
-import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.layout.HBox
 import javafx.scene.layout.Pane
 import javafx.scene.layout.Region
+import javafx.scene.layout.VBox
 
-const val stylesheet: String = "/ca/pragmaticcoding/widgetsfx/css/widgetsfx.css"
 
 /**
  * Standard testing styles defined in widgetsfx.css.  These place coloured borders
@@ -39,15 +39,6 @@ enum class TestStyle(val selector: String) {
 infix fun <T : Node> T.testStyleAs(nodeStyle: TestStyle) = apply { styleClass += nodeStyle.selector }
 
 /**
- * Extension function to add the standard widgetsfx.css stylesheet to a Scene
- */
-fun Scene.addWidgetStyles() = apply {
-    object {}::class.java.getResource(stylesheet)?.toString()?.let {
-        stylesheets += it
-    }
-}
-
-/**
  * Extension function to add a stylesheet to a Scene
  *
  * @receiver Scene
@@ -57,14 +48,10 @@ fun Scene.addStyleSheet(sheetName: String) = apply {
     object {}::class.java.getResource(sheetName)?.toString()?.let { stylesheets += it }
 }
 
-/**
- * Extension function to add the standard widgetsfx.css stylesheet to a Parent.
- * Note that this will not have any effect unless the Parent is used as the Root
- * element of a Scene.
- */
-fun <T : Parent> T.addWidgetStyles() = apply {
-    object {}::class.java.getResource(stylesheet)?.toString()?.let { stylesheets += it }
+fun Scene.addStyleSheet(theObject: Any, sheetName: String) = apply {
+    theObject::class.java.getResource(sheetName)?.toString()?.let { stylesheets += it }
 }
+
 
 /**
  * Infix extension function to quickly add padding to a Region with all sides padded to the same amount.
@@ -72,6 +59,23 @@ fun <T : Parent> T.addWidgetStyles() = apply {
  * @param padSize The amount of padding to apply equally to all sides of the Region
  */
 infix fun <T : Region> T.padWith(padSize: Double): T = apply { padding = Insets(padSize) }
+
+infix fun <T : Region> T.minWidthOf(size: Double): T = apply { minWidth = size }
+infix fun <T : Region> T.minHeightOf(size: Double): T = apply { minHeight = size }
+infix fun <T : Region> T.maxWidthOf(size: Double): T = apply { maxWidth = size }
+infix fun <T : Region> T.maxHeightOf(size: Double): T = apply { maxHeight = size }
+infix fun <T : Region> T.prefWidthOf(size: Double): T = apply { prefWidth = size }
+infix fun <T : Region> T.prefHeightOf(size: Double): T = apply { prefHeight = size }
+infix fun <T : Node> T.visibilityOf(visibility: Boolean): T = apply { isVisible = visibility }
+infix fun <T : Node> T.isHidden(isHidden: Boolean): T = apply {
+    isVisible = !isHidden
+    isManaged = !isHidden
+}
+
+infix fun <T : Node> T.bindHidden(hiddenProperty: ObservableBooleanValue): T = apply {
+    visibleProperty().bind(hiddenProperty)
+    managedProperty().bind(hiddenProperty)
+}
 
 /**
  * Infix extension function to add a styleclass selector to a Node.
@@ -89,6 +93,7 @@ infix fun <T : Node> T.addStyle(newStyleClass: String): T = apply { styleClass +
  */
 
 infix fun HBox.alignTo(pos: Pos): HBox = apply { alignment = pos }
+infix fun VBox.alignTo(pos: Pos): VBox = apply { alignment = pos }
 
 /**
  * Operator to add a Node to a Pane or Pane subclass
@@ -108,12 +113,17 @@ operator fun Pane.plusAssign(newChild: Node) {
  * @param property The external binary property to monitor for changes
  */
 
-fun <T : Node> T.bindPseudoCode(pseudoClass: PseudoClass, property: ObservableBooleanValue): T = apply {
+fun <T : Node> T.bindPseudoClass(pseudoClass: PseudoClass, property: ObservableBooleanValue): T = apply {
     pseudoClassStateChanged(pseudoClass, property.value)
     property.addListener(InvalidationListener {
         pseudoClassStateChanged(pseudoClass, property.value)
+        val fred: SimpleBooleanProperty
     })
 }
+
+infix fun <T : Node> T.addToPane(pane: Pane): T = also { pane.children += it }
+
+
 
 
 

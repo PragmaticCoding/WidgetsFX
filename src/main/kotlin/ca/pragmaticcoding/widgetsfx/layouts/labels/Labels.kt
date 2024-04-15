@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty
 import javafx.beans.value.ObservableObjectValue
 import javafx.beans.value.ObservableStringValue
 import javafx.scene.Node
+import javafx.scene.control.ContentDisplay
 import javafx.scene.control.Label
 import javafx.scene.control.Labeled
 
@@ -64,6 +65,10 @@ infix fun <T : Labeled> T.bindGraphic(graphicProperty: ObservableObjectValue<Nod
  * @param value External ObservableStringValue to bind to textProperty()
  */
 infix fun <T : Labeled> T.bindTo(value: ObservableStringValue): T = apply { textProperty().bind(value) }
+fun <T : Labeled> T.wrapText(): T = apply { isWrapText = true }
+infix fun <T : Labeled> T.underlined(setUnderlineOn: Boolean): T = apply { isUnderline = setUnderlineOn }
+infix fun <T : Labeled> T.oriented(orientation: ContentDisplay): T = apply { contentDisplay = orientation }
+
 
 /**
  * Factory method to create a Label with its textProperty() bound to an external property
@@ -112,7 +117,7 @@ fun labelOf(value: ObservableStringValue, styleClass: String, graphicProperty: O
  * @param value The text to place in the Label
  * @return Label
  */
-fun h1Of(value: String) = Label(value) styleAs H1
+fun h1Of(value: String, graphic: Node? = null) = Label(value, graphic) styleAs H1
 
 /**
  * Factory method to create a Label styled as an [H1] with its Text property bound to
@@ -121,7 +126,7 @@ fun h1Of(value: String) = Label(value) styleAs H1
  * @param value ObservableStringProperty to bind the Label's Text property to
  * @return Label
  */
-fun h1Of(value: ObservableStringValue) = Label() styleAs H1 bindTo value
+fun h1Of(value: ObservableStringValue, graphic: Node? = null) = Label("", graphic) styleAs H1 bindTo value
 
 /**
  * Factory method to create a Label styled as an [H2]
@@ -129,7 +134,7 @@ fun h1Of(value: ObservableStringValue) = Label() styleAs H1 bindTo value
  * @param value The text to place in the Label
  * @return Label
  */
-fun h2Of(value: String) = Label(value) styleAs H2
+fun h2Of(value: String, graphic: Node? = null) = Label(value, graphic) styleAs H2
 
 /**
  * Factory method to create a Label styled as an [H2] with its Text property bound to
@@ -138,7 +143,7 @@ fun h2Of(value: String) = Label(value) styleAs H2
  * @param value ObservableStringProperty to bind the Label's Text property to
  * @return Label
  */
-fun h2Of(value: ObservableStringValue) = Label() styleAs H2 bindTo value
+fun h2Of(value: ObservableStringValue, graphic: Node? = null) = Label("", graphic) styleAs H2 bindTo value
 
 /**
  * Factory method to create a Label styled as an [H3]
@@ -146,7 +151,7 @@ fun h2Of(value: ObservableStringValue) = Label() styleAs H2 bindTo value
  * @param value The text to place in the Label
  * @return Label
  */
-fun h3Of(value: String) = Label(value) styleAs H3
+fun h3Of(value: String, graphic: Node? = null) = Label(value, graphic) styleAs H3
 
 /**
  * Factory method to create a Label styled as an [H3] with its Text property bound to
@@ -155,7 +160,7 @@ fun h3Of(value: String) = Label(value) styleAs H3
  * @param value ObservableStringProperty to bind the Label's Text property to
  * @return Label
  */
-fun h3Of(value: ObservableStringValue) = Label() styleAs H3 bindTo value
+fun h3Of(value: ObservableStringValue, graphic: Node? = null) = Label("", graphic) styleAs H3 bindTo value
 
 /**
  * Factory method to create a Label styled as an [DATA]
@@ -163,7 +168,7 @@ fun h3Of(value: ObservableStringValue) = Label() styleAs H3 bindTo value
  * @param value The text to place in the Label
  * @return Label
  */
-fun dataOf(value: String) = Label(value) styleAs DATA
+fun dataOf(value: String, graphic: Node? = null) = Label(value, graphic) styleAs DATA
 
 /**
  * Factory method to create a Label styled as an [DATA] with its Text property bound to
@@ -172,7 +177,7 @@ fun dataOf(value: String) = Label(value) styleAs DATA
  * @param value ObservableStringProperty to bind the Label's Text property to
  * @return Label
  */
-fun dataOf(value: ObservableStringValue) = Label() styleAs DATA bindTo value
+fun dataOf(value: ObservableStringValue, graphic: Node? = null) = Label("", graphic) styleAs DATA bindTo value
 
 /**
  * Operator definition for += for Labels that binds the Label's Text property to another StringProperty
@@ -180,4 +185,6 @@ fun dataOf(value: ObservableStringValue) = Label() styleAs DATA bindTo value
  * @param otherProperty StringProperty to bind the Label's Text property to.
  */
 operator fun Labeled.plusAssign(otherProperty: StringProperty) = run { textProperty() += otherProperty }
+
+
 

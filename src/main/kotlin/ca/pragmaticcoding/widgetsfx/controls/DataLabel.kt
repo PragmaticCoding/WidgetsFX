@@ -31,7 +31,7 @@ import javafx.util.Duration
 class DataLabel : Label {
     private val errorFlag: BooleanProperty = SimpleBooleanProperty(false)
 
-    companion object {
+    private companion object {
         private val ERROR_CLASS: PseudoClass = PseudoClass.getPseudoClass("error")
     }
 
