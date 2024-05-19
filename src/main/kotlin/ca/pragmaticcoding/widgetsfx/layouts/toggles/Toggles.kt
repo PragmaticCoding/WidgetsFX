@@ -1,24 +1,19 @@
 package ca.pragmaticcoding.widgetsfx.layouts.toggles
 
-import javafx.application.Application
 import javafx.beans.property.BooleanProperty
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.css.PseudoClass
-import javafx.scene.Scene
 import javafx.scene.control.Toggle
 import javafx.scene.control.ToggleGroup
-import javafx.scene.layout.GridPane
-import javafx.scene.layout.Region
 import javafx.scene.layout.StackPane
-import javafx.stage.Stage
 
 
 interface TogglePart {
     fun getToggleGroup(): ToggleGroup?
 
-    fun setToggleGroup(var1: ToggleGroup?): Unit
+    fun setToggleGroup(var1: ToggleGroup?)
 
     fun toggleGroupProperty(): ObjectProperty<ToggleGroup?>
 
@@ -35,16 +30,16 @@ class ToggleImpl : TogglePart {
 
     override fun getToggleGroup(): ToggleGroup? = toggleGroup.value
 
-    override fun setToggleGroup(p0: ToggleGroup?) {
-        toggleGroup.value = p0
+    override fun setToggleGroup(var1: ToggleGroup?) {
+        toggleGroup.value = var1
     }
 
     override fun toggleGroupProperty() = toggleGroup
 
     override fun isSelected(): Boolean = selected.value
 
-    override fun setSelected(p0: Boolean) {
-        selected.value = p0
+    override fun setSelected(var1: Boolean) {
+        selected.value = var1
     }
 
     override fun selectedProperty() = selected
@@ -73,29 +68,3 @@ class ToggleStackPane(toggleImpl: ToggleImpl = ToggleImpl()) : StackPane(), Togg
         toggleImpl.initializeSelected(this)
     }
 }
-
-class TogglesApplication : Application() {
-    override fun start(stage: Stage) {
-        stage.scene = Scene(createContent(), 340.0, 300.0).apply {
-            TogglesApplication::class.java.getResource("toggles.css")?.toString()?.let { stylesheets += it }
-        }
-        stage.show()
-    }
-
-    private fun createContent(): Region = GridPane().also { gridPane ->
-        val toggleGroup = ToggleGroup()
-        for (x in 0..8) {
-            for (y in 0..8) {
-                val pane = ToggleStackPane().apply {
-                    styleClass += "toggle-stackpane"
-                    setOnMouseClicked { isSelected = true }
-                    isPickOnBounds = true
-                    toggleGroup.toggles.add(this)
-                    gridPane.add(this, x, y)
-                }
-            }
-        }
-    }
-}
-
-fun main() = Application.launch(TogglesApplication::class.java)
