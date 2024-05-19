@@ -15,8 +15,8 @@ plugins {
 
 group = "ca.pragmaticcoding"
 val archivesBaseName = "WidgetsFX"
-version = "0.1.0-SNAPSHOT"
-
+//version = "0.1.0-SNAPSHOT"
+version = "0.1.0"
 repositories {
     mavenCentral()
 }
@@ -55,7 +55,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
 //}
 
 javafx {
-    version = "21.0.2"
+    version = "17.0.2"
     modules = listOf("javafx.controls", "javafx.fxml")
 }
 
